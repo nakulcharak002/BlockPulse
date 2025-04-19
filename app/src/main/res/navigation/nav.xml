@@ -17,12 +17,20 @@
         android:id="@+id/marketFragment"
         android:name="com.example.blockpulse.fragment.MarketFragment"
         android:label="fragment_market2"
-        tools:layout="@layout/fragment_market2" />
+        tools:layout="@layout/fragment_market2" >
+        <action
+            android:id="@+id/action_marketFragment_to_deatilsFragment"
+            app:destination="@id/deatilsFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/watchListFragment"
+        android:id="@+id/watchlistFragment"
         android:name="com.example.blockpulse.fragment.WatchListFragment"
         android:label="fragment_watch_list"
-        tools:layout="@layout/fragment_watch_list" />
+        tools:layout="@layout/fragment_watch_list" >
+        <action
+            android:id="@+id/action_watchListFragment_to_deatilsFragment"
+            app:destination="@id/deatilsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deatilsFragment"
         android:name="com.example.blockpulse.fragment.DetailsFragment"

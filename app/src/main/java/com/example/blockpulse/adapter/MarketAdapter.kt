@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.blockpulse.R
 import com.example.blockpulse.databinding.CurrencyItemLayoutBinding
-import com.example.blockpulse.fragment.HomeFragment
 import com.example.blockpulse.fragment.HomeFragmentDirections
+import com.example.blockpulse.fragment.MarketFragmentDirections
+import com.example.blockpulse.fragment.WatchListFragmentDirections
 import com.example.blockpulse.fragment.models.CryptoCurrency
 
-class MarketAdapter( var context: Context , var list : List<CryptoCurrency>) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
+class MarketAdapter(var context: Context, var list: List<CryptoCurrency>, var type: String) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
     inner class MarketViewHolder(view: View):RecyclerView.ViewHolder(view){
         var binding = CurrencyItemLayoutBinding.bind(view)
 
@@ -27,6 +28,11 @@ class MarketAdapter( var context: Context , var list : List<CryptoCurrency>) : R
     override fun getItemCount(): Int {
        return list.size
     }
+    fun UpdateData(dataItem: List<CryptoCurrency> ){
+    list = dataItem
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: MarketViewHolder, position: Int) {
     val item  = list[position]
@@ -56,9 +62,19 @@ class MarketAdapter( var context: Context , var list : List<CryptoCurrency>) : R
 
         }
         holder.itemView.setOnClickListener{
-            findNavController(it).navigate(
-                HomeFragmentDirections.actionHomeFragmentToDeatilsFragment(item)
-            )
+            if(type == "home") {
+                findNavController(it).navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDeatilsFragment(item)
+                )
+            }else if(type == "market"){
+                findNavController(it).navigate(
+                 MarketFragmentDirections.actionMarketFragmentToDeatilsFragment(item)
+                )
+            }else{
+                findNavController(it).navigate(
+                    WatchListFragmentDirections.actionWatchListFragmentToDeatilsFragment(item)
+                )
+            }
         }
 
     }
